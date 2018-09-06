@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="net.eimarketing.eim20180410.mapper.OrderDaoMapper">
+
+	<!-- 查看所有订单 -->
+	<select id="findOrder" parameterType="String" resultType="net.eimarketing.eim20180410.entity.Order">
+		SELECT 
+			orderid, headimgurl, door, seat
+		FROM
+			eim20180410_order
+	</select>
+	
+	<select id="getNum"  resultType="int" parameterType="net.eimarketing.eim20180410.entity.Order">
+		SELECT 
+			count(orderid)
+		FROM
+			eim20180410_order
+	</select>
+	
+	<!-- 通过影厅查找订单 -->
+	<select id="findOrderByDoor" parameterType="net.eimarketing.eim20180410.entity.Order" resultType="net.eimarketing.eim20180410.entity.Order">
+		SELECT 
+			orderid, headimgurl, door, seat
+		FROM
+			eim20180410_order 
+		where
+			door=#{door}
+	</select>
+	
+	<!-- 获取最大影厅 -->
+	<select id="getMaxdoor" resultType="int">
+		SELECT 
+			max(door) 
+		FROM
+			eim20180410_order 
+	</select>
+	
+	<!-- 添加订单 -->
+	<insert id="addOrder" parameterType="net.eimarketing.eim20180410.entity.Order">
+    	INSERT INTO
+			eim20180410_order (headimgurl, door, seat)
+		VALUES
+			(#{headimgurl, jdbcType=VARCHAR}, #{door, jdbcType=INTEGER}, #{seat, jdbcType=INTEGER})
+	</insert>
+	
+</mapper>

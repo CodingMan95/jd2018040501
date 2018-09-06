@@ -1,0 +1,389 @@
+html,body{
+	margin: 0;
+	overflow: hidden;
+	height: 100%;
+}
+#app{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+.start{
+	
+}
+.box-0{
+	position: relative;
+	height: 100%;
+	background: url(../img/bg.jpg);
+	background-size: 100% 100%;
+	padding-top: 10%;
+}
+.box-0>.click-mask{
+	position: absolute;
+    top: 71.9%;
+    height: 6.5%;
+    left: 2%;
+    width: 52.4%;
+}
+.box-0>.click-mask>img{
+	position: absolute;
+	animation: 2s twinkles linear infinite;
+	width: 25%;
+	left: 20%;
+	top:90%;
+}
+.box-0>.label>img{
+	opacity: 0;
+	animation: 5s twinkle infinite linear;
+}
+.box-0>.label>img{
+	width: 65%;
+}
+.box-0>.label1{
+	opacity: 0;
+	animation: 5s twinkle infinite linear;
+	text-align: right;
+	animation-delay: 0.2s;
+}
+.box-0>.label1>img{
+	width: 60%;
+}
+.box-0>.label2{
+	opacity: 0;
+	animation: 5s twinkle infinite linear;
+	text-align: left;
+	animation-delay: 1s;
+}
+.box-0>.label2>img{
+	width: 50%;
+}
+.box-0>.label3{
+	opacity: 0;
+	animation: 5s twinkle infinite linear;
+	text-align: right;
+	animation-delay: 0.5s;
+}
+.box-0>.label3>img{
+	width: 50%;
+}
+.box-0>.label4{
+	opacity: 0;
+	animation: 8s twinklelong infinite linear;
+	text-align: center;
+}
+.box-0>.label4>img{
+	width: 80%;
+}
+.box-0>.label5{
+	position: relative;
+	opacity: 0;
+	overflow: auto;
+	animation: 5s twinkle infinite linear;
+	text-align: center;
+	animation-delay: 1s;
+	margin-bottom: 5%;
+}
+.box-0>.label5>.bfx{
+	position: absolute;
+	top: 50%;
+	left: 10%;
+	transform: translateY(-50%);
+	width: 30%;
+}
+.box-0>.label5>.cr{
+	float: right;
+	width: 50%;
+}
+.box-0>.label6{
+	opacity: 0;
+	animation: 7s twinklelong infinite linear;
+	text-align: left;
+}
+.box-0>.label6>img{
+	width: 70%;
+}
+@keyframes twinkle{
+	0%{
+		opacity: 0;
+	}
+	50%{
+		opacity: 1;
+	}
+	55%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+@keyframes twinkles{
+	0%{
+		transform: scaleX(1) scaleY(1);
+	}
+	50%{
+		transform: scaleX(.9) scaleY(.9);
+		opacity: 1;
+	}
+	55%{
+		transform: scaleX(1) scaleY(1);
+	}
+	100%{
+		transform: scaleX(.9) scaleY(.9);
+	}
+}
+@keyframes twinklelong{
+	0%{
+		opacity: 0;
+	}
+	30%{
+		opacity: 1;
+	}
+	75%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+.box-video{
+	position: relative;
+	height: 100%;
+	background: black;
+}
+.box-video>.pass{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	z-index: 99;
+	color: #fff;
+	text-align: right;
+}
+.box-video>video{
+	position: fixed;
+	top: 0%;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+.box-0>.clickMask>img{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+.box-1{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: url(../img/WechatIMG8.jpeg) no-repeat;
+	background-size: 100% 100%;
+}
+.box-1>.click{
+    position: absolute;
+    bottom: 5.2%;
+    left: 24%;
+    width: 53%;
+    height: 12%;
+}
+.box-2{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: url(../img/WechatIMG6.jpeg) no-repeat;
+	background-size: 100% 100%;
+}
+.box-2>.mask{
+	position: fixed;
+	top: 0;
+	text-align: center;
+	left: 0;
+	width: 100%;
+	bottom: 0;
+	z-index: 100;
+	background: rgba(111,111,111,.5);
+}
+.box-2>.mask>.main{
+	position: absolute;
+	color: #fff;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+.box-2>.door{
+	position: absolute;
+    top: 27%;
+    background: #cb1a1d;
+    left: 31%;
+    width: 38%;
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+    height: 3.3%;
+}
+.box-2>.time{
+	position: absolute;
+	top: 35%;
+	color: #272727;
+	left: 14%;
+	font-size: 10px;
+}
+.box-2>.main{
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+	height: 35%;
+	padding: 0 5% 0 10%;
+	font-size: 0;
+	text-align: center;
+	top: 46%;
+}
+.box-2>.main>.mask{
+	position: absolute;
+	width: 43%;
+	line-height: 0;
+	height: 49%;
+	z-index: 0;
+	border: 1px dashed red;
+	top: 33%;
+	left: 31%;
+}
+.box-2>.main>.item{
+	margin: 0;
+	position: relative;
+	z-index: 99;
+	box-sizing: border-box;
+	width: 12.5%;
+	height: 16.5%;
+	overflow: hidden;
+	padding: 1%;
+	display: inline-block;
+}
+.box-2>.main>.item>.headImg{
+	width: 100%;
+}
+.box-2>.main>.item>.location{
+	width: 80%;
+}
+.box-2>.location{
+	position: absolute;
+	width: 21%;
+	height: 5%;
+	bottom: 10%;
+	left: 24%;
+	font-size: 12px;
+}
+.box-2>.location>.row{
+	position: absolute;
+	top: 16%;
+	left: 20%;
+}
+.box-2>.location>.columen{
+	position: absolute;
+	top: 16%;
+	left: 20%;
+	left: 48.5%;
+}
+.box-2>.click{
+	position: absolute;
+	bottom: 0;
+	height: 10%;
+	width: 100%;
+}
+.box-3{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: url(../img/WechatIMG13.jpeg) no-repeat;
+	background-size: 100% 100%;
+}
+.box-3>.mask{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	z-index: 100;
+	width: 100%;
+	background: rgba(111, 111, 111, .5);
+}
+.box-3>.mask>.main{
+	text-align: right;
+	height: 100%;
+}
+.box-3>.mask>.main>img{
+	height: 40%;
+	margin-right: 5%;
+}
+.box-3>.mask>.main>.no{
+	text-align: center;
+}
+.box-3>.main-location{
+	position: absolute;
+    width: 25%;
+    height: 6.5%;
+    top: 64%;
+    left: 9%;
+}
+.box-3>.main-location>.row{
+	position: absolute;
+	top: 50%;
+	left: 38%;
+	transform: translateY(-50%);
+}
+.box-3>.main-location>.column{
+	position: absolute;
+	top: 50%;
+	left: 66%;
+	transform: translateY(-50%);
+}
+.box-3>.main-door{
+	position: absolute;
+    top: 65%;
+    height: 4.5%;
+    width: 9%;
+    left: 44%;
+    background: #fff;
+}
+.box-3>.mask>.main>.no>.no{
+	position: relative;
+}
+.box-3>.mask>.main>.no>.no>.mask{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+.box-3>.mask>.main>.no>.href-go{
+	position: relative;
+}
+.box-3>.mask>.main>.no>.href-go>.mask{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+.box-3>.main-door>.door{
+	position: absolute;
+	padding: 5%;
+	padding-right: 0;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	left: 50%;
+}
+.box-3>.or-location{
+	position: absolute;
+    left: 70%;
+    width: 20.5%;
+    height: 6%;
+    font-size: 12px;
+    top: 48.5%;
+}
+.box-3>.or-location>.row,.box-3>.or-location>.column{
+	height: 50%;
+	width: 55%;
+	text-align: center;
+	padding-top: 3%;
+}

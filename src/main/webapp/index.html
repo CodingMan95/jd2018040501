@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+
+	</body>
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		var appId = "wx19eb7b496e9e29cc";
+		var ru = 'http://app.ei-marketing.net:8080/jd2018040501/admin.do';//跳转主页
+		var toUrl = "http://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appId + "&redirect_uri="
+				+ encodeURIComponent("http://wechat.ei-marketing.net/wechat/LoginSerlet.do")
+				+ "&response_type=code&scope=snsapi_base&state=" + getState() + "#wechat_redirect";
+		location.href = toUrl;
+		/* 0表示获取详情   1不是静默授权 */
+	    function getState() {
+	        return appId + "," + encodeURIComponent(ru)+","+1;
+	    }
+	</script>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<div  v-show="showBox === -2" class="box-0">
+				<div @click="changeShowStatus(-2)" class="click-mask">
+					<img src="img/WechatIMG4.png"/>
+				</div>
+				<div class="label">
+					<img src="img/hsyx.png"/>
+				</div>
+				<div class="label1">
+					<img src="img/nlcdxyx.png"/>
+				</div>
+				<div class="label2">
+					<img src="img/6666666.png"/>
+				</div>
+				<div class="label3">
+					<img src="img/hxhlhdyz.png"/>
+				</div>
+				<div class="label4">
+					<img src="img/redhero.png"/>
+				</div>
+				<div class="label5">
+					<img class="bfx" src="img/bfx.png"/>
+					<img class="cr" src="img/cr.png"/>
+				</div>
+				<div class="label6">
+					<img src="img/cnlss.png"/>
+				</div>
+			</div>
+			<div v-show="showBox === -1" class="box-video">
+				<div @click="changeShowStatus(-3)" class="pass">跳过</div>
+				<video 
+					x5-video-player-type="h5"
+					x5-video-player-fullscreen="true"
+					webkit-playsinline="true" 
+					x-webkit-airplay="true"  
+					playsinline="true"
+					x5-playsinline  playsinline  webkit-playsinline="true" 
+					preload="auto" id="video" height="100%" width="100%" src="img/WechatSight1523930618.mp4">
+				</video>
+			</div>
+			<div v-show="showBox === 0" class="box-1">
+				<div @click="changeShowStatus(0)" class="click">
+				</div>
+			</div>
+			<div v-show="showBox === 1" class="box-2">
+				<div  v-if="loading" class="mask">
+					<div class="main">
+						<img src="./img/tail-spin.svg"/>
+						<br />
+						loading . . .
+					</div>
+				</div>
+				<div class="door">太平洋影院{{door}}厅</div>
+				<div class="time">{{time}}</div>
+				<div class="main">
+					<div class="mask"></div>
+					<div @click="getLocation(index)" v-for="(item, index) in seatList" class="item">
+						<img class="headImg" v-if="item.img" :src="item.img" />
+						<img class="location" v-else-if="!item.status" src="img/WechatIMG2.png" />
+						<img class="location" v-else src="img/WechatIMG3.png" />
+					</div>
+				</div>
+				<div class="location">
+					<div class="row">{{row}}</div>
+					<div class="columen">{{column}}</div>
+				</div>
+				<div @click="submit" class="click"></div>
+			</div>
+			<div @click.prevent="showMask" v-show="showBox === 2" class="box-3">
+				<div v-show="hrefStatus" class="mask">
+					<div class="main">
+						<img src="img/WechatIMG5.png"/>
+						<div class="no">
+							<div @click.prevent="nos" class="no">
+								<img width="50%" src="img/fxan2.png"/>
+								<div class="mask">
+								</div>
+							</div>
+							<div @click.prevent="hrefGo" class="href-go">
+								<img  width="50%" src="img/fxan.png"/>
+								<div class="mask">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="main-location">
+					<div class="row">{{row}}</div>
+					<div class="column">{{column}}</div>
+				</div>
+				<div class="main-door">
+					<div class="door">
+						{{door}}
+					</div>
+				</div>
+				<div class="or-location">
+					<div class="row">{{row}}</div>
+					<div class="column">{{column}}</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				showBox: -2,
+				time: 28,
+				door: 0,
+				loading: false,
+				row: 0,
+				column: 0,
+				seatList: [],  
+				selectedStatus: -1,
+				hrefStatus: false,
+				userHeadImg: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1648097700,2286779267&fm=27&gp=0.jpg',
+				preloadImg: '',
+				shouStatus: false,
+				preloadLoading: true,
+				username: '1111'
+			},
+			methods: {
+				nos(){
+					alert('分享给盆友，为RED HERO助力')
+					this.hrefStatus = !this.hrefStatus
+					return
+				},
+				hrefGo(){
+					window.location.href = 'https://www.jd.com'
+				},
+				changeShowStatus(index) {
+					var indexto
+					if(index === -3){
+						this.showBox = 0
+						document.querySelector('#video').pause()
+						clearInterval(indexto)
+						return
+					}
+					if(index === -2){
+						document.querySelector('#video').play()
+						indexto = setInterval(() =>{
+							console.log(document.querySelector('#video').ended)
+							if(document.querySelector('#video').ended){
+								this.showBox = 0
+								clearInterval(indexto)
+							}
+						},1000)
+					}
+					this.showBox = index + 1	
+				},
+				getLocation(index) {
+					if(this.seatList[index].selected) {
+						return
+					}
+					this.row = (parseInt((index - index % 8) / 8) + 1)
+					this.column = index % 8 + 1
+					if(this.selectedStatus !== index && this.selectedStatus !== -1) {
+						this.seatList[this.selectedStatus].status = false
+					}
+					this.seatList[index].status = !this.seatList[index].status
+					if(this.selectedStatus === index) {
+						this.row = 0
+						this.column = 0
+						this.selectedStatus = -1
+					} else {
+						this.selectedStatus = index
+					}
+				},
+				submit() {
+					var that = this
+					var seat = (this.row - 1) * 8 + this.column
+					if(seat < 0){
+						alert('请选择座位！')
+						return
+					}
+					this.loading = true
+					console.log(seat)
+					axios.get('http://app.ei-marketing.net:8080/jd2018040501/addOrder.do', {
+						params:{
+							headimgurl: that.userHeadImg,
+							seat: seat
+						}
+					}).then(function(response){
+						console.log(response)
+						that.loading = false
+						if (response.data === 200){
+							that.showBox = 2
+						}
+					})
+				},
+				setList(list) {
+					this.seatList = list
+				},
+				showMask() {
+					this.hrefStatus = !this.hrefStatus
+				},
+				defaultList() {
+					this.loading = true
+					for(let i = 0; i < 48; i++) {
+						this.seatList.push({
+							status: false,
+						})
+					}
+				},
+				preload(){
+					let that = this
+					let img = new Image()
+					img.src = 'img/hhh.gif'
+					img.onload = function(){
+						that.preloadImg = 'img/hhh.gif'
+						that.preloadLoading = false
+						setTimeout(() => {
+							that.shouStatus = true
+						}, 1300)
+					}
+				}
+			},
+			created() {
+				// 图片预加载
+				this.preload()
+				var that = this
+				var list = []
+				this.defaultList()
+				axios.get('http://app.ei-marketing.net:8080/jd2018040501/getUser.do').then(function(response){
+//					if (response.data === null){
+//						return
+//					}
+					console.log(response)
+					that.username = response.data.nickname
+					that.userHeadImg = response.data.headimgurl
+				})
+				axios.get('http://app.ei-marketing.net:8080/jd2018040501/findOrder.do').then(function(response){
+					that.loading = false
+					response = response.data
+					that.door = response.door
+					console.log(response)
+					for (let i = 0; i < response.order.length; i++){
+						Vue.set(that.seatList[response.order[i].seat-1], 'selected', true)
+						Vue.set(that.seatList[response.order[i].seat-1], 'img', response.order[i].headimgurl)
+					}
+				})
+			}
+		})
+		$(function() {
+			var that = this
+			//console.log(location.href.split('#')[0]);
+			$.ajax({
+				type: "POST",
+				url: "http://app.ei-marketing.net/fenxiang/index.do",
+				data: {
+					"url": location.href.split('#')[0]
+				},
+				success: function(msg) {
+					console.log(msg)
+					wx.config({
+						debug: false,
+						appId: msg.appid, // 必填，公众号的唯一标识
+						timestamp: msg.Timestamp, // 必填，生成签名的时间戳
+						nonceStr: msg.noncestr, // 必填，生成签名的随机串
+						signature: msg.signature, // 必填，签名，见附录1
+						jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage'] //
+					});
+				}
+			});
+			/**
+			分享
+			*/
+			wx.ready(function() {
+				console.log('=====>'+ that.app.username)
+				wx.onMenuShareTimeline({
+					title: '致敬RED HERO', // 分享标题
+					desc: '速度与温度的化身，原来'+that.app.username+'就是助攻Red Hero的幕后玩家。', // 分享描述
+					link: "http://app.ei-marketing.net:8080/jd2018040501/index.html", // 分享链接
+					imgUrl: 'http://app.ei-marketing.net:8080/jd2018040501/img/WechatIMG83.png', // 分享图标
+					success: function() {
+					},
+					cancel: function() {
+					}
+				});
+				wx.onMenuShareAppMessage({
+					title: '致敬RED HERO', // 分享标题
+					desc: '速度与温度的化身，原来'+that.app.username+'就是助攻Red Hero的幕后玩家。', // 分享描述
+					link: 'http://app.ei-marketing.net:8080/jd2018040501/index.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+					imgUrl: 'http://app.ei-marketing.net:8080/jd2018040501/img/WechatIMG83.png', // 分享图标
+					type: '', // 分享类型,music、video或link，不填默认为link
+					dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+					success: function() {
+						// 用户确认分享后执行的回调函数
+					},
+					cancel: function() {
+						// 用户取消分享后执行的回调函数
+					}
+				});
+			});
+			/*   wx.error(function(res){
+			      console.log(res);
+
+			  });  */
+		}())
+	</script>
+</html>
